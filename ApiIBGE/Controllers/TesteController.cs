@@ -9,7 +9,7 @@ namespace ApiIBGE.Controllers
         [HttpGet]
         public string TesteApi()
         {
-            return "TESTEAPI";
+            return "TESTEAPI2";
         }
 
     }
