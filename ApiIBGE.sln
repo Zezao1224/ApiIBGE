@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiIBGE", "ApiIBGE\ApiIBGE.csproj", "{E5EAE78B-5197-4AC0-B5F5-417C217E27A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5EAE78B-5197-4AC0-B5F5-417C217E27A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5EAE78B-5197-4AC0-B5F5-417C217E27A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5EAE78B-5197-4AC0-B5F5-417C217E27A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5EAE78B-5197-4AC0-B5F5-417C217E27A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BDB660D-AAC9-49B5-AF3F-0B86D32A05CC}
+	EndGlobalSection
+EndGlobal
