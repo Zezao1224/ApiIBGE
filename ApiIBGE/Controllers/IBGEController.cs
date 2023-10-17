@@ -1,6 +1,7 @@
 ﻿using ApiIBGE.Data;
 using ApiIBGE.Models;
 using ApiIBGE.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +10,21 @@ namespace ApiIBGE.Controllers;
 [Route(template: "v1")]
 public class IBGEController : ControllerBase
 {
+
+    private AppDbContext _context;
+    private IMapper _mapper;
+
+    public IBGEController(AppDbContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
+
     [HttpGet]
     [Route(template: "ibge")]
-    public async Task<IActionResult> GetAsync([FromServices] AppDbContext context)
+    public async Task<IActionResult> GetAsync()
     {
-        var ibge = await context.ibge.AsNoTracking().ToListAsync();
+        var ibge = await _context.ibge.AsNoTracking().ToListAsync();
         return Ok(ibge);
     }
 
