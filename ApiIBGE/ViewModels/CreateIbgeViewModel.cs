@@ -4,6 +4,7 @@ namespace ApiIBGE.ViewModels;
 
 public class CreateIbgeViewModel
 {
-    [Required]
+    public int id { get; set; }
     public string State { get; set; }
+    public string city { get; set; }
 }

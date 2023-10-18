@@ -27,46 +27,47 @@ public class IBGEController : ControllerBase
 
     [HttpGet]
     [Route(template: "ibge/{id}")]
-    public async Task<IActionResult> GetByIdAsync([FromServices] AppDbContext context, [FromRoute] int id)
+    public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
     {
-        var ibge = await context.ibge.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        var ibge = await _context.ibge.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return ibge == null ? NotFound() : Ok(ibge);
     }
 
     [HttpPost]
     [Route(template: "ibge")]
-    public async Task<IActionResult> PostAsync([FromServices] AppDbContext context, [FromBody] CreateIbgeViewModel model)
+    public async Task<IActionResult> PostAsync( [FromBody] CreateIbgeViewModel model)
     {
         if (!ModelState.IsValid)
             return BadRequest();
 
-        var ibge = new Ibge
+        Ibge ibge = new Ibge
         {
-            State = model.State
+            State = model.State,
+            City= model.city,
+            Id= model.id
         };
 
         try
         {
-            await context.ibge.AddAsync(ibge);
-            await context.SaveChangesAsync();
+            await _context.ibge.AddAsync(ibge);
+            await _context.SaveChangesAsync();
             return Created(uri: $"v1/ibge/{ibge.Id}", ibge);
         }
         catch (Exception)
         {
-            return BadRequest();
+            return UnprocessableEntity();
         }
 
     }
 
     [HttpPut]
     [Route(template: "ibge/{id}")]
-
-    public async Task<IActionResult> PutAsync([FromServices] AppDbContext context, [FromBody] CreateIbgeViewModel model, [FromRoute] int id)
+    public async Task<IActionResult> PutAsync([FromBody] CreateIbgeViewModel model, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
             return BadRequest();
 
-        var ibge = await context.ibge.FirstOrDefaultAsync(x => x.Id == id);
+        var ibge = await _context.ibge.FirstOrDefaultAsync(x => x.Id == id);
 
         if (ibge == null)
             return NotFound();
@@ -74,9 +75,10 @@ public class IBGEController : ControllerBase
         try
         {
             ibge.State = model.State;
+            ibge.City = model.city;
 
-            context.ibge.Update(ibge);
-            await context.SaveChangesAsync();
+            _context.ibge.Update(ibge);
+            await _context.SaveChangesAsync();
 
             return Ok(ibge);
         }
@@ -89,14 +91,14 @@ public class IBGEController : ControllerBase
 
     [HttpDelete]
     [Route(template: "ibge/{id}")]
-    public async Task<IActionResult> DeleteAsync([FromServices] AppDbContext context, [FromRoute] int id)
+    public async Task<IActionResult> DeleteAsync( [FromRoute] int id)
     {
-        var ibge = await context.ibge.FirstOrDefaultAsync(x => x.Id == id);
+        var ibge = await _context.ibge.FirstOrDefaultAsync(x => x.Id == id);
 
         try
         {
-            context.ibge.Remove(ibge);
-            await context.SaveChangesAsync();
+            _context.ibge.Remove(ibge);
+            await _context.SaveChangesAsync();
             return Ok();
         }
         catch (Exception)
