@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiIBGE.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiIBGE.Controllers
 {
@@ -9,6 +10,15 @@ namespace ApiIBGE.Controllers
         [HttpGet]
         public string TesteApi()
         {
+            ibge _ibge= new ibge();
+            _ibge.city = "OSASCO";
+            _ibge.state = "SP";
+
+            using (var db = new DemoContext())
+            {
+                db.Add(_ibge);
+                db.SaveChanges();
+            }
             return "TESTEAPI";
         }
 
