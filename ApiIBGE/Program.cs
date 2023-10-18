@@ -1,6 +1,10 @@
 using ApiIBGE.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SQLitePCL;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 SQLitePCL.Batteries.Init();
 SQLitePCL.raw.FreezeProvider();
@@ -17,6 +21,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                 .AddJwtBearer(options =>
+                 {
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                         ValidateIssuer = true,
+                         ValidateAudience = true,
+                         ValidateLifetime = true,
+                         ValidateIssuerSigningKey = true,
+                         IssuerSigningKey = new SymmetricSecurityKey
+                       (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                     };
+                 });
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -26,6 +44,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

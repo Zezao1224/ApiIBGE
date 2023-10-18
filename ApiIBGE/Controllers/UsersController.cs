@@ -1,7 +1,11 @@
 ﻿using ApiIBGE.Data;
 using ApiIBGE.Models;
+using ApiIBGE.util;
 using ApiIBGE.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Text;
 
 namespace ApiIBGE.Controllers
 {
@@ -10,10 +14,12 @@ namespace ApiIBGE.Controllers
     public class UsersController : ControllerBase
     {
         private AppDbContext _context;
+        private IConfiguration _config;
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, IConfiguration Configuration)
         {
             _context = context;
+            _config = Configuration;
         }
 
         [HttpPost]
@@ -23,7 +29,7 @@ namespace ApiIBGE.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            Users user = new Users
+            Users user = new Users()
             {
                 Email = model.Email,
                 Senha = model.Senha
@@ -40,6 +46,23 @@ namespace ApiIBGE.Controllers
                 return UnprocessableEntity();
             }
 
+        }
+        [HttpPost]
+        [Route(template: "Login")]
+        public async Task<IActionResult> GetByIdAsync([FromBody] CreateUsersViewModel model)
+        {
+            var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x=> x.Senha == model.Senha &&
+                                                                                   x.Email==model.Email );
+
+            string key = _config["Jwt:Key"].ToString();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(ClsUtil.GerarTokenJWT(key));
+            }
         }
 
 

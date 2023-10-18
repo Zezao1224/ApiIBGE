@@ -1,12 +1,14 @@
 ﻿using ApiIBGE.Data;
 using ApiIBGE.Models;
 using ApiIBGE.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiIBGE.Controllers;
 [ApiController]
 [Route(template: "v1")]
+
 public class IBGEController : ControllerBase
 {
 
@@ -19,6 +21,7 @@ public class IBGEController : ControllerBase
 
     [HttpGet]
     [Route(template: "ibge")]
+    [Authorize]
     public async Task<IActionResult> GetAsync()
     {
         var ibge = await _context.ibge.AsNoTracking().ToListAsync();
