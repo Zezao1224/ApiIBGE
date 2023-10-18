@@ -5,8 +5,14 @@ namespace ApiIBGE.Data;
 
 public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+    }
+
     public DbSet<Ibge> ibge { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    => optionsBuilder.UseSqlite(connectionString:"DataSource=bd_ibge.db;Cache=Shared");
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //=> optionsBuilder.UseSqlite(connectionString:"DataSource=bd_ibge.db;Cache=Shared");
+
 }

@@ -1,7 +1,6 @@
 ﻿using ApiIBGE.Data;
 using ApiIBGE.Models;
 using ApiIBGE.ViewModels;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +11,10 @@ public class IBGEController : ControllerBase
 {
 
     private AppDbContext _context;
-    private IMapper _mapper;
 
-    public IBGEController(AppDbContext context, IMapper mapper)
+    public IBGEController(AppDbContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
     [HttpGet]
