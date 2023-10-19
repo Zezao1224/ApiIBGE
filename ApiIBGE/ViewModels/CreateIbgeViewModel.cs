@@ -16,3 +16,13 @@ public class CreateIbgeViewModel
     public string? State { get; set; }
     public string? city { get; set; }
 }
+
+public class CityViewModel
+{
+    public string City { get; set; } = string.Empty;
+}
+
+public class StateViewModel
+{
+    public string State { get; set; } = string.Empty;
+}
