@@ -54,7 +54,8 @@ namespace ApiIBGE.Controllers
             var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x=> x.Senha == model.Senha &&
                                                                                    x.Email==model.Email );
 
-            string key = _config["Jwt:Key"].ToString();
+            var key = _config["Jwt:Key"];
+
             if (user == null)
             {
                 return NotFound();

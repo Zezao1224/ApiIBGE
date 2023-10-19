@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiIBGE.Controllers;
 [ApiController]
 [Route(template: "v1")]
-
+[Authorize]
 public class IBGEController : ControllerBase
 {
 
@@ -21,7 +21,6 @@ public class IBGEController : ControllerBase
 
     [HttpGet]
     [Route(template: "ibge")]
-    [Authorize]
     public async Task<IActionResult> GetAsync()
     {
         var ibge = await _context.ibge.AsNoTracking().ToListAsync();
