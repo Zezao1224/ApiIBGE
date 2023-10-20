@@ -37,6 +37,12 @@ namespace ApiIBGE.Controllers
 
             try
             {
+       
+                if (ClsUtil.ValidaEmail(user.Email!) != true)
+                {
+                    return NotFound();
+                }
+
                 await _context.users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 return Created(uri: $"v1/user/{user.id}", user);
@@ -51,10 +57,10 @@ namespace ApiIBGE.Controllers
         [Route(template: "Login")]
         public async Task<IActionResult> GetByIdAsync([FromBody] CreateUsersViewModel model)
         {
-            var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x=> x.Senha == model.Senha &&
-                                                                                   x.Email==model.Email );
+            var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x => x.Senha == model.Senha &&
+                                                                                   x.Email == model.Email);
 
-            var key = _config["Jwt:Key"];
+            var key = _config["Jwt:Key"];              
 
             if (user == null)
             {
@@ -62,10 +68,8 @@ namespace ApiIBGE.Controllers
             }
             else
             {
-                return Ok(ClsUtil.GerarTokenJWT(key));
+                return Ok(ClsUtil.GerarTokenJWT(key!));
             }
         }
-
-
     }
 }
