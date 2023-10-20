@@ -20,9 +20,9 @@ O token expirará após 2hs de sua criação e só será gerado pelo EndPoint de
 
 
 ### Links
-* Documentação: https://baltaio.blob.core.windows.net/temp/desafio-dotnet/01-sobre.pdf
+* Documentação: https://ibgeapi.azurewebsites.net/swagger/index.html
 
-* Link oficial da api:https://localhost:7125/swagger/index.html
+* Link oficial da api: https://ibgeapi.azurewebsites.net
 
 ### Ajuda
  Caso precise de ajuda, pode entrar em contato com algum dos autores que iremos te auxiliar.
