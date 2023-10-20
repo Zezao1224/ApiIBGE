@@ -6,13 +6,13 @@ namespace ApiIBGE.ViewModels
     {
         public CreateUsersViewModel() { }
         [Required]
-        [MaxLength(255, ErrorMessage = "O e-mail deve conter no máximo 255 caracteres.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail em formato inválido.")]
+        [MaxLength(255, ErrorMessage = "The email must contain a maximum of 255 characters.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email in invalid format.")]
         public string? Email { get; set; }
         [Required]
-        [MinLength(8, ErrorMessage = "A senha deve conter no mínimo 8 caracteres.")]
-        [MaxLength(15, ErrorMessage = "A senha deve conter no máximo 15 caracteres.")]
-        public string? Senha { get; set; }
+        [MinLength(8, ErrorMessage = "The password must contain at least 8 characters.")]
+        [MaxLength(15, ErrorMessage = "The password must contain a maximum of 15 characters.")]
+        public string? Password { get; set; }
 
     }
 }
