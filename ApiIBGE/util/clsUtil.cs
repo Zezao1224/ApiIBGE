@@ -1,6 +1,10 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using ApiIBGE.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ApiIBGE.util
 {
@@ -24,6 +28,26 @@ namespace ApiIBGE.util
             public Token(string bearer)
             {
                 Bearer = bearer;
+            }
+        }
+
+
+        internal static bool ValidaEmail(string _email)
+        {
+            Regex regex;          
+
+            try
+            {
+                const string estrutura = @"^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$";
+                regex = new Regex(estrutura);
+
+                return regex.IsMatch(_email);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro em ClsUtil - ValidaEmail() " + ex.Message);
+                return false;
             }
         }
     }

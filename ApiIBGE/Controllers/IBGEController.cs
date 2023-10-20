@@ -106,7 +106,7 @@ public class IBGEController : ControllerBase
 
         try
         {
-            _context.ibge.Remove(ibge);
+            _context.ibge.Remove(ibge!);
             await _context.SaveChangesAsync();
             return Ok();
         }
