@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiIBGE.Controllers;
 [ApiController]
-[Route(template: "v1")]
+[Route(template: "v1/ibge/")]
 [Authorize]
 public class IBGEController : ControllerBase
 {
@@ -20,23 +20,30 @@ public class IBGEController : ControllerBase
     }
 
     [HttpGet]
-    [Route(template: "ibge")]
-    public async Task<IActionResult> GetAsync()
-    {
-        var ibge = await _context.ibge.AsNoTracking().ToListAsync();
-        return Ok(ibge);
-    }
-
-    [HttpGet]
-    [Route(template: "ibge/{id}")]
+    [Route(template: "{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
     {
         var ibge = await _context.ibge.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return ibge == null ? NotFound() : Ok(ibge);
     }
 
+    [HttpGet]
+    [Route(template: "city")]
+    public async Task<IActionResult> GetByCityAsync([FromBody] CityViewModel model)
+    {
+        var ibge = await _context.ibge.AsNoTracking().FirstOrDefaultAsync(x => x.City == model.City);
+        return ibge == null ? NotFound() : Ok(ibge);
+    }
+
+    [HttpGet]
+    [Route(template: "state")]
+    public async Task<IActionResult> GetByStateAsync([FromBody] StateViewModel model)
+    {
+        var ibge = await _context.ibge.Where(x => x.State == model.State).ToListAsync<Ibge>();
+        return ibge == null ? NotFound() : Ok(ibge);
+    }
+
     [HttpPost]
-    [Route(template: "ibge")]
     public async Task<IActionResult> PostAsync( [FromBody] CreateIbgeViewModel model)
     {
         if (!ModelState.IsValid)
@@ -63,7 +70,7 @@ public class IBGEController : ControllerBase
     }
 
     [HttpPut]
-    [Route(template: "ibge/{id}")]
+    [Route(template: "{id}")]
     public async Task<IActionResult> PutAsync([FromBody] CreateIbgeViewModel model, [FromRoute] int id)
     {
         if (!ModelState.IsValid)
@@ -92,7 +99,7 @@ public class IBGEController : ControllerBase
     }
 
     [HttpDelete]
-    [Route(template: "ibge/{id}")]
+    [Route(template: "{id}")]
     public async Task<IActionResult> DeleteAsync( [FromRoute] int id)
     {
         var ibge = await _context.ibge.FirstOrDefaultAsync(x => x.Id == id);
