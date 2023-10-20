@@ -1,15 +1,15 @@
 # API IBGE
 ### Objetivo
-Esta api tem o objetivo de facilitar a utilização de dados IBGE, componentizando um banco de dados em SQLLite e possibilitando a atualização e inclusão de mais dados por meio dos EndPoints disponíveis. Assim, facilitando a implementação de suas funcionalidades em diversas aplicações.
+Esta api tem o objetivo de facilitar a utilização de dados IBGE, componentizando um banco de dados em SQLite e possibilitando a atualização e inclusão de mais dados por meio dos EndPoints disponíveis. Assim, facilitando a implementação de suas funcionalidades em diversas aplicações.
 
 ### Endpoints
 
 Alguns exemplos de EndPoints:
 
 * '**GET /v1/ibge/{ id }**': Retorna os dados ibge com base no id.
-* '**POST /v1/ibge**': Periste um novo ibge no banco.
-* '**PUT /v1/ibge**': Altera um ibge existente.
-* '**DELETE /v1/ibge**': Deleta um ibge existente.
+* '**POST /v1/ibge**': Persiste um novo dado do ibge no banco.
+* '**PUT /v1/ibge**': Altera um dado do ibge existente.
+* '**DELETE /v1/ibge**': Deleta um dado do ibge existente.
 
 Os demais EndPoints estão disponíveis na documentação oficial no título "Links" deste Readme.
 
@@ -25,7 +25,7 @@ O token expirará após 2hs de sua criação e só será gerado pelo EndPoint de
 * Link oficial da api:https://localhost:7125/swagger/index.html
 
 ### Ajuda
- Caso precisse de ajuda, pode entrar em contato com algum dos autores que iremos te auxíliar.
+ Caso precise de ajuda, pode entrar em contato com algum dos autores que iremos te auxiliar.
 
 ### Autores
 <h3> Bruno Luiz</h3>
