@@ -30,7 +30,7 @@ namespace ApiIBGE.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ibge");
+                    b.ToTable("ibge", (string)null);
                 });
 
             modelBuilder.Entity("ApiIBGE.Models.Users", b =>
@@ -47,7 +47,7 @@ namespace ApiIBGE.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

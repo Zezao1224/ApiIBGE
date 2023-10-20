@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace ApiIBGE.util
 {
+    /// <summary>
+    /// Classe para utilidades do projeto
+    /// </summary>
     public class ClsUtil
     {
         internal static Token GerarTokenJWT(string key)
@@ -21,10 +24,21 @@ namespace ApiIBGE.util
             Token _token = new Token(stringToken.ToString());
             return _token;
         }
+
+        /// <summary>
+        /// Classe para gerar o Token JWT
+        /// </summary>
         public class Token
         {
+            /// <summary>
+            /// Propriedade Bearer
+            /// </summary>
             public string Bearer { get; set; }
 
+            /// <summary>
+            /// Construtor Token com bearer incluído
+            /// </summary>
+            /// <param name="bearer"></param>
             public Token(string bearer)
             {
                 Bearer = bearer;
