@@ -32,7 +32,7 @@ namespace ApiIBGE.Controllers
             Users user = new Users()
             {
                 Email = model.Email,
-                Senha = model.Senha
+                Password = model.Password
             };
 
             try
@@ -51,7 +51,7 @@ namespace ApiIBGE.Controllers
         [Route(template: "Login")]
         public async Task<IActionResult> GetByIdAsync([FromBody] CreateUsersViewModel model)
         {
-            var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x=> x.Senha == model.Senha &&
+            var user = await _context.users.AsNoTracking().FirstOrDefaultAsync(x=> x.Password == model.Password &&
                                                                                    x.Email==model.Email );
 
             var key = _config["Jwt:Key"];
