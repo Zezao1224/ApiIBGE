@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using SQLitePCL;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 
 SQLitePCL.Batteries.Init();
 SQLitePCL.raw.FreezeProvider();
@@ -18,7 +19,24 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connect
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+
+    c.SwaggerDoc(name: "v1", info: new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "ApiIBGE",
+        Description = "API focada em apresentar dados do IBGE.",
+        TermsOfService = new Uri(uriString: "https://github.com/Zezao1224/ApiIBGE")
+    });
+
+    var xmlApiPath = Path.Combine(AppContext.BaseDirectory, path2: $"{typeof(Program).Assembly.GetName().Name}.xml");
+
+    c.IncludeXmlComments(xmlApiPath);
+
+}
+    );
 builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -31,7 +49,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                          ValidateLifetime = true,
                          ValidateIssuerSigningKey = true,
                          IssuerSigningKey = new SymmetricSecurityKey
-                        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
                      };
                  });
 
@@ -42,6 +60,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(setup =>
+{
+    setup.RoutePrefix = "swagger";
+    setup.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Api Documentation");
+});
 
 app.UseHttpsRedirection();
 

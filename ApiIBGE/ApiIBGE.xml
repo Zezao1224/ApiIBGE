@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiIBGE</name>
+    </assembly>
+    <members>
+        <member name="T:ApiIBGE.Controllers.IBGEController">
+            <summary>
+            Controlador IBGE para os métodos POST, GET, PUT e DELETE da classe IBGE
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.#ctor(ApiIBGE.Data.AppDbContext)">
+            <summary>
+            Controlador IBGE com o contexto de banco de dados
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.GetByIdAsync(System.Int32)">
+            <summary>
+            GET para buscar uma localidade através do ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.GetByCityAsync(ApiIBGE.ViewModels.CityViewModel)">
+            <summary>
+            GET para buscar uma localidade através do nome exato da cidade, considerando espaços e acentuações.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.GetByStateAsync(ApiIBGE.ViewModels.StateViewModel)">
+            <summary>
+            GET para buscar uma localidade através do UF diretamente pelo link do navegador.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.PostAsync(ApiIBGE.ViewModels.CreateIbgeViewModel)">
+            <summary>
+            POST para inserir uma nova localidade com os dados do IBGE.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.PutAsync(ApiIBGE.ViewModels.CreateIbgeViewModel,System.Int32)">
+            <summary>
+            PUT para atualizar uma localidade existente com os dados do IBGE.
+            </summary>
+            <param name="model"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.IBGEController.DeleteAsync(System.Int32)">
+            <summary>
+            DELETE para deletar uma localidade existente com os dados do IBGE.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiIBGE.Controllers.UsersController">
+            <summary>
+            Controlador de usuários
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.Controllers.UsersController.#ctor(ApiIBGE.Data.AppDbContext,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Controlador de usuários com o contexto de banco de dados e configuration
+            </summary>
+            <param name="context"></param>
+            <param name="Configuration"></param>
+        </member>
+        <member name="M:ApiIBGE.Controllers.UsersController.PostAsync(ApiIBGE.ViewModels.CreateUsersViewModel)">
+            <summary>
+            POST para criar um usuário, baseado no e-mail e senha.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApiIBGE.Controllers.UsersController.GetByIdAsync(ApiIBGE.ViewModels.CreateUsersViewModel)">
+            <summary>
+            GET para localizar um usuário cadastrado através do e-mail e senha.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ApiIBGE.Data.AppDbContext">
+            <summary>
+            Classe para inclusão das tabelas no banco de dados em EF
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.Data.AppDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ApiIBGE.Data.AppDbContext})">
+            <summary>
+            Instância da conexão com o banco de dados
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:ApiIBGE.Data.AppDbContext.ibge">
+            <summary>
+            Tabela ibge
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Data.AppDbContext.users">
+            <summary>
+            Tabela users
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ApiIBGE.Migrations.UsersContext">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.UsersContext.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.UsersContext.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.UsersContext.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ApiIBGE.Migrations.AlteracoesUsersEIbgev2">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.AlteracoesUsersEIbgev2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.AlteracoesUsersEIbgev2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:ApiIBGE.Migrations.AlteracoesUsersEIbgev2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:ApiIBGE.Models.Ibge">
+            <summary>
+            Classe com as principais propriedades do IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Models.Ibge.Id">
+            <summary>
+            Id da localidade IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Models.Ibge.State">
+            <summary>
+            State (Estado) da localidade IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Models.Ibge.City">
+            <summary>
+            City (Cidade) da localidade IBGE
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.Models.Users">
+            <summary>
+            Classe Users
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.Models.Users.#ctor">
+            <summary>
+            Construtor vazio da classe Users
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.Models.Users.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Construtor da classe Users com as propriedades da classe Users
+            </summary>
+            <param name="id"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+        </member>
+        <member name="P:ApiIBGE.Models.Users.id">
+            <summary>
+            Propriedade id da classe Users
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Models.Users.Email">
+            <summary>
+            Propriedade Email da classe Users
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.Models.Users.Password">
+            <summary>
+            Propriedade Password da classe Users
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.util.ClsUtil">
+            <summary>
+            Classe para utilidades do projeto
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.util.ClsUtil.Token">
+            <summary>
+            Classe para gerar o Token JWT
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.util.ClsUtil.Token.Bearer">
+            <summary>
+            Propriedade Bearer
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.util.ClsUtil.Token.#ctor(System.String)">
+            <summary>
+            Construtor Token com bearer incluído
+            </summary>
+            <param name="bearer"></param>
+        </member>
+        <member name="T:ApiIBGE.ViewModels.CreateIbgeViewModel">
+            <summary>
+            Classe utilizada para passar as propriedades de IBGE
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.ViewModels.CreateIbgeViewModel.#ctor">
+            <summary>
+            Construtor vazio da classe CreateIbgeViewModel
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.ViewModels.CreateIbgeViewModel.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Construtor da classe CreateIbgeViewModel com as propriedades da classe
+            </summary>
+            <param name="id"></param>
+            <param name="state"></param>
+            <param name="city"></param>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CreateIbgeViewModel.id">
+            <summary>
+            Propriedade id da classe IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CreateIbgeViewModel.State">
+            <summary>
+            Propriedade State (Estado) da classe IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CreateIbgeViewModel.city">
+            <summary>
+            Propriedade city (Cidade) da classe IBGE
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.ViewModels.CityViewModel">
+            <summary>
+            Classe utilizada para passar a propriedade City ao controlador IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CityViewModel.City">
+            <summary>
+            Propriedade City
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.ViewModels.StateViewModel">
+            <summary>
+            Classe utilizada para passar a propriedade State ao controlador IBGE
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.StateViewModel.State">
+            <summary>
+            Propriedade State
+            </summary>
+        </member>
+        <member name="T:ApiIBGE.ViewModels.CreateUsersViewModel">
+            <summary>
+            Classe utilizada para passar as propriedades de usuário
+            </summary>
+        </member>
+        <member name="M:ApiIBGE.ViewModels.CreateUsersViewModel.#ctor">
+            <summary>
+            Construtor vazio da classe CreateUsersViewModel
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CreateUsersViewModel.Email">
+            <summary>
+            Propriedade Email
+            </summary>
+        </member>
+        <member name="P:ApiIBGE.ViewModels.CreateUsersViewModel.Password">
+            <summary>
+            Propriedade Password
+            </summary>
+        </member>
+    </members>
+</doc>

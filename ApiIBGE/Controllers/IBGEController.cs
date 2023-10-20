@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiIBGE.Controllers;
+
+/// <summary>
+/// Controlador IBGE para os métodos POST, GET, PUT e DELETE da classe IBGE
+/// </summary>
 [ApiController]
 [Route(template: "v1/ibge/")]
 [Authorize]
@@ -13,12 +17,20 @@ public class IBGEController : ControllerBase
 {
 
     private AppDbContext _context;
-
+    /// <summary>
+    /// Controlador IBGE com o contexto de banco de dados
+    /// </summary>
+    /// <param name="context"></param>
     public IBGEController(AppDbContext context)
     {
         _context = context;
     }
 
+    /// <summary>
+    /// GET para buscar uma localidade através do ID.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet]
     [Route(template: "{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
@@ -27,6 +39,11 @@ public class IBGEController : ControllerBase
         return ibge == null ? NotFound() : Ok(ibge);
     }
 
+    /// <summary>
+    /// GET para buscar uma localidade através do nome exato da cidade, considerando espaços e acentuações.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpGet]
     [Route(template: "city")]
     public async Task<IActionResult> GetByCityAsync([FromBody] CityViewModel model)
@@ -35,6 +52,11 @@ public class IBGEController : ControllerBase
         return ibge == null ? NotFound() : Ok(ibge);
     }
 
+    /// <summary>
+    /// GET para buscar uma localidade através do UF diretamente pelo link do navegador.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpGet]
     [Route(template: "state")]
     public async Task<IActionResult> GetByStateAsync([FromBody] StateViewModel model)
@@ -43,6 +65,11 @@ public class IBGEController : ControllerBase
         return ibge == null ? NotFound() : Ok(ibge);
     }
 
+    /// <summary>
+    /// POST para inserir uma nova localidade com os dados do IBGE.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> PostAsync( [FromBody] CreateIbgeViewModel model)
     {
@@ -69,6 +96,12 @@ public class IBGEController : ControllerBase
 
     }
 
+    /// <summary>
+    /// PUT para atualizar uma localidade existente com os dados do IBGE.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpPut]
     [Route(template: "{id}")]
     public async Task<IActionResult> PutAsync([FromBody] CreateIbgeViewModel model, [FromRoute] int id)
@@ -98,6 +131,11 @@ public class IBGEController : ControllerBase
 
     }
 
+    /// <summary>
+    /// DELETE para deletar uma localidade existente com os dados do IBGE.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpDelete]
     [Route(template: "{id}")]
     public async Task<IActionResult> DeleteAsync( [FromRoute] int id)
@@ -106,7 +144,7 @@ public class IBGEController : ControllerBase
 
         try
         {
-            _context.ibge.Remove(ibge);
+            _context.ibge.Remove(ibge!);
             await _context.SaveChangesAsync();
             return Ok();
         }

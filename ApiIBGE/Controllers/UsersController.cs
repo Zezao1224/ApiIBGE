@@ -9,6 +9,9 @@ using System.Text;
 
 namespace ApiIBGE.Controllers
 {
+    /// <summary>
+    /// Controlador de usuários
+    /// </summary>
     [ApiController]
     [Route(template: "v1")]
     public class UsersController : ControllerBase
@@ -16,12 +19,22 @@ namespace ApiIBGE.Controllers
         private AppDbContext _context;
         private IConfiguration _config;
 
+        /// <summary>
+        /// Controlador de usuários com o contexto de banco de dados e configuration
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="Configuration"></param>
         public UsersController(AppDbContext context, IConfiguration Configuration)
         {
             _context = context;
             _config = Configuration;
         }
 
+        /// <summary>
+        /// POST para criar um usuário, baseado no e-mail e senha.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route(template: "CreateUser")]
         public async Task<IActionResult> PostAsync([FromBody] CreateUsersViewModel model)
@@ -47,6 +60,12 @@ namespace ApiIBGE.Controllers
             }
 
         }
+
+        /// <summary>
+        /// GET para localizar um usuário cadastrado através do e-mail e senha.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route(template: "Login")]
         public async Task<IActionResult> GetByIdAsync([FromBody] CreateUsersViewModel model)
@@ -62,7 +81,7 @@ namespace ApiIBGE.Controllers
             }
             else
             {
-                return Ok(ClsUtil.GerarTokenJWT(key));
+                return Ok(ClsUtil.GerarTokenJWT(key!));
             }
         }
 
